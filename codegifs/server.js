@@ -33,16 +33,19 @@ function getGIF() {
 }
 
 function download(url, file_name) {
+  const location = __dirname + "/static/" + file_name;
   request
     .get(url)
     .on("error", function(err) {
       console.error(err);
     })
-    .pipe(fs.createWriteStream(file_name));
+    .pipe(fs.createWriteStream(location));
 }
 
 // Start your engines!
 http.listen(PORT, async function() {
   console.log(`listening on *:${PORT}`);
-  download(await getGIF(), "test.gif");
+  for (i = 1; i < 26; i++) {
+    download(await getGIF(), `image${i}.gif`);
+  }
 });
