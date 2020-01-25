@@ -19,23 +19,17 @@ app.get("/", function(req, res) {
 });
 
 function getGIF() {
-  const api_url =
-    "https://api.giphy.com/v1/gifs/random?api_key=oHQGDCthzzwKl3V0PgnLnPuyYI6fJOjs&tag=&rating=PG";
-  https
-    .get(api_url, res => {
-      let data = "";
-      res.on("data", chunk => {
-        data += chunk;
-      });
+  return new Promise((resolve, rej) => {
+    const api_url =
+      "https://api.giphy.com/v1/gifs/random?api_key=oHQGDCthzzwKl3V0PgnLnPuyYI6fJOjs&tag=&rating=PG";
 
-      res.on("end", () => {
-        console.log(JSON.stringify(JSON.parse(data)["data"]["embed_url"]));
-        return JSON.stringify(JSON.parse(data)["data"]["embed_url"]);
-      });
-    })
-    .on("error", err => {
-      console.log("Error: " + err.message);
+    request.get(api_url, { json: true }, (err, res, body) => {
+      if (err) {
+        return console.error(err);
+      }
+      resolve(body.data.images.downsized_large.url);
     });
+  });
 }
 
 function download(url, file_name) {
@@ -48,8 +42,7 @@ function download(url, file_name) {
 }
 
 // Start your engines!
-http.listen(PORT, function() {
+http.listen(PORT, async function() {
   console.log(`listening on *:${PORT}`);
-  getGIF();
-  // download(getGIF(), "test.gif");
+  download(await getGIF(), "test.gif");
 });
