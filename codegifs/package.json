@@ -1,0 +1,14 @@
+{
+  "name": "codegifs",
+  "version": "0.1.0",
+  "description": "codegifs",
+  "author": "Ian Pringle <pard@0x44.pw>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1",
+	"request": "^2.88.0"
+  }
+}
