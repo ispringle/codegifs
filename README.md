@@ -15,3 +15,6 @@ docker run -p 80:8080 -d codegifs
 Then navigate to `localhost` and see all my hard work.
 
 Also availabe with `docker pull pard68/codegifs:latest`
+
+## Contribute
+PRs welcome™
