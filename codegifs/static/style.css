@@ -1,9 +1,45 @@
-.wrapper {
+body {
+  height: 100vh;
+  background: grey;
+}
+
+.header {
+  grid-area: header;
+  height: 100px;
+  background-color: red;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.page {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 1px;
-  background-color: #fff;
+  grid-template-columns: [start] 200px [middle] auto [end] 50px;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header header"
+    "sidebar game_board game_board";
+}
+
+.sidebar {
+  grid-area: sidebar;
+  margin-right: 10px;
+  background: green;
+}
+
+.game_board {
+  grid-area: game_board;
+  max-height: 60vh;
+  max-width: 60vh;
+}
+
+.grid {
+  height: 50vh;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 10px;
+  background: grey;
+  background-color: grey;
   color: #444;
 }
 
@@ -12,11 +48,58 @@
   color: #fff;
   border-radius: 1px;
   padding: 2px;
-  font-size: 150%;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.box:hover {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #dddddd;
+  box-shadow: 0 0 5px gold;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid gold;
+}
+
+.glow {
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #dddddd;
+}
+
+.red {
+  box-shadow: 0 0 5px red;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid red;
+}
+
+.blue {
+  box-shadow: 0 0 5px blue;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid blue;
 }
 
 img {
   display: block;
   width: 100%;
-  height: auto;
+  max-height: 20vh;
+  max-width: 20vh;
+}
+
+.footer {
+  height: 100px;
+  clear: both;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: blue;
 }
