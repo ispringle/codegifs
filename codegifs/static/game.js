@@ -4,12 +4,10 @@ socket.on("message", function(data) {
 });
 
 socket.emit("new player");
-setInterval(function() {
-  socket.emit("movement", movement);
-}, 1000 / 60);
 
 function sendClick(click) {
-  socket.emit("image", click);
+  socket.emit("image_clicked", click);
+  console.log(click);
 }
 
 socket.on("state", function(players) {

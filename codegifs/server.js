@@ -2,7 +2,6 @@
 const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
-const https = require("https");
 const io = require("socket.io")(http);
 const fs = require("fs");
 const request = require("request");
@@ -21,6 +20,18 @@ app.get("/", function(req, res) {
 // Add the WebSocket handlers
 io.on("connection", function(socket) {
   console.log(`a user has connected on socket ${socket.id}`);
+  socket.on("image_clicked", function(click) {
+    console.log(click);
+  });
+});
+
+var players = {};
+io.on("connection", function(socket) {
+  socket.on("new player", function() {
+    players[socket.id] = {
+      color: `#${intToRGB(hashSocket(socket.id))}`
+    };
+  });
 });
 
 function hashSocket(sock) {
@@ -35,36 +46,6 @@ function intToRGB(i) {
   var c = (i & 0x00ffffff).toString(16).toUpperCase();
   return "00000".substring(0, 6 - c.length) + c;
 }
-
-var players = {};
-io.on("connection", function(socket) {
-  socket.on("new player", function() {
-    players[socket.id] = {
-      x: 300,
-      y: 300,
-      color: `#${intToRGB(hashSocket(socket.id))}`
-    };
-  });
-  socket.on("movement", function(data) {
-    var player = players[socket.id] || {};
-    if (data.left) {
-      player.x -= 5;
-    }
-    if (data.up) {
-      player.y -= 5;
-    }
-    if (data.right) {
-      player.x += 5;
-    }
-    if (data.down) {
-      player.y += 5;
-    }
-  });
-});
-
-setInterval(function() {
-  io.sockets.emit("state", players);
-}, 1000 / 60);
 
 function getGIF() {
   return new Promise((resolve, rej) => {
