@@ -1,0 +1,6 @@
+version: '3'
+services:
+  codegifs:
+    image: "pard68/codegifs"
+    ports:
+      - 80:8080
