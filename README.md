@@ -1,5 +1,7 @@
 # codegifs
 
+![Codegifs CI/CD](https://github.com/pard68/codegifs/workflows/Codegifs%20CI/CD/badge.svg?branch=master)
+
 A blatant knockoff of the board game Codenames, but with gifs
 
 ## Usage
