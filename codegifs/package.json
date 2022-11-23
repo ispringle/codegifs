@@ -11,6 +11,6 @@
     "express": "^4.16.1",
     "request": "^2.88.0",
     "server.js": "^1.0.0",
-    "socket.io": "^2.0.0"
+    "socket.io": "^2.5.0"
   }
 }
